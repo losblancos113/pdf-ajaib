@@ -130,7 +130,6 @@ export function useViewer(container: Ref<HTMLDivElement>, viewer: Ref<HTMLDivEle
         eventBus: pdfEventBus.value,
         linkService: pdfLinkService.value,
         l10n: NullL10n,
-        useOnlyCssZoom: false,
         removePageBorders: true
       })
 
