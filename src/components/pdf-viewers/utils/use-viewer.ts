@@ -1,8 +1,8 @@
 import 'pdfjs-dist/web/pdf_viewer.css'
-import type { Ref} from 'vue-demi';
+import type { Ref } from 'vue-demi'
 import { computed, onBeforeUnmount, shallowRef, watch } from 'vue-demi'
 import type * as PDFJS from 'pdfjs-dist'
-import type { PDFViewer, PDFLinkService, EventBus } from 'pdfjs-dist/web/pdf_viewer'
+import type { EventBus, PDFLinkService, PDFViewer } from 'pdfjs-dist/web/pdf_viewer'
 import useLoading from './use-loading'
 import { useClamp } from '@vueuse/math'
 import { createEventHook } from '@vueuse/core'
@@ -35,7 +35,7 @@ export function useViewer(container: Ref<HTMLDivElement>, viewer: Ref<HTMLDivEle
       if (typeof window !== 'undefined' && 'Worker' in window)
         if (workerSrc) {
           pdfJS.value.GlobalWorkerOptions.workerSrc = workerSrc
-        } else {
+        } else if (!pdfJS.value.GlobalWorkerOptions.workerSrc) {
           pdfJS.value.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfJS.value.version}/build/pdf.worker.min.js`
         }
 
@@ -49,7 +49,8 @@ export function useViewer(container: Ref<HTMLDivElement>, viewer: Ref<HTMLDivEle
           password: password,
           cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfJS.value.version}/cmaps/`,
           cMapPacked: true,
-          disableStream: false
+          disableStream: false,
+          isEvalSupported: false
         })
 
         pdfDoc.value = await pdfLoadingTask.value.promise
