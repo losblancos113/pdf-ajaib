@@ -1,5 +1,5 @@
-import type { InteractEvent, Interactable } from '@interactjs/types'
-import type { Ref} from 'vue-demi';
+import type { Interactable, InteractEvent } from '@interactjs/types'
+import type { Ref } from 'vue-demi'
 import { inject, onScopeDispose, shallowRef, watch } from 'vue-demi'
 import { DROPZONE_CONTEXT_SYMBOL } from './use-drop'
 
@@ -18,7 +18,7 @@ export default function useDrag(target: Ref<HTMLElement>, hooks?: DragHooks) {
     destroy()
 
     if (target.value) {
-      const { default: Interact } = await import('interactjs')
+      const Interact = (await import('interactjs')).default
 
       // Interact.dynamicDrop(true)
 

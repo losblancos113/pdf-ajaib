@@ -1,6 +1,6 @@
 import type { Interactable, InteractEvent } from '@interactjs/types'
 import type { MaybeRef } from '@vueuse/core'
-import type { Ref} from 'vue-demi';
+import type { Ref } from 'vue-demi'
 import { onScopeDispose, shallowRef, unref, watch } from 'vue-demi'
 
 export interface ResizeOptions {
@@ -26,7 +26,7 @@ export default function useResize(target: Ref<HTMLElement>, options: ResizeOptio
     destroy()
 
     if (target.value) {
-      const { default: Interact } = await import('interactjs')
+      const Interact = (await import('interactjs')).default
 
       // Interact.dynamicDrop(true)
 
